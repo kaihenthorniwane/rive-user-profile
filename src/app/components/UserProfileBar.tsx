@@ -3,9 +3,9 @@ import UserProfileIcon, {
   type UserProfileIconProps,
 } from "./UserProfileIcon";
 
-type UserProfileBarProps = {
-  userName?: string;
-  userIconProps?: UserProfileIconProps;
+export type UserProfileBarProps = {
+  userName: string;
+  userIconProps: UserProfileIconProps;
 };
 
 export default function UserProfileBar({
@@ -18,7 +18,7 @@ export default function UserProfileBar({
     none: "none",
     "do not disturb": "do not disturb",
     away: "away",
-    online: "online 4hr ago",
+    online: "online",
     typing: "typing...",
   };
 
@@ -30,17 +30,17 @@ export default function UserProfileBar({
       : "none";
 
   return (
-    <div className="flex items-center gap-2.5">
+    <button className="flex items-center gap-2.5 transition hover:scale-[1.0125] text-left active:scale-[0.9875] active:opacity-50">
       <UserProfileIcon
         imageSrc={userIconProps?.imageSrc}
         profileState={userIconProps?.profileState}
       />
       <div className="flex flex-col gap-0.5 mt-0.5 leading-none">
-        <span className="font-bold">{userName}</span>
+        <span className="font-bold text-lg leading-none">{userName}</span>
         {statusText !== "none" && (
           <span className="text-my-gray">{statusText}</span>
         )}
       </div>
-    </div>
+    </button>
   );
 }

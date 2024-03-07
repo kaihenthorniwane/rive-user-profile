@@ -16,7 +16,7 @@ const config: Config = {
       },
       colors: {
         "my-black": "#212124",
-        "my-gray": "#828282",
+        "my-gray": "#8181A7",
         "my-light-gray": "#F0F2FF",
         "my-super-light-gray": "#FAFBFF",
       },

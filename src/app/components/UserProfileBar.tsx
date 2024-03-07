@@ -6,11 +6,13 @@ import UserProfileIcon, {
 export type UserProfileBarProps = {
   userName: string;
   userIconProps: UserProfileIconProps;
+  handleRandomizeBasedonName?: (name: string) => void;
 };
 
 export default function UserProfileBar({
   userName = "No name assigned",
   userIconProps,
+  handleRandomizeBasedonName = (name: string) => {},
 }: UserProfileBarProps) {
   const statusIndicatorTextVariants: {
     [key in UserProfileIconStates]: string;
@@ -30,7 +32,10 @@ export default function UserProfileBar({
       : "none";
 
   return (
-    <button className="flex items-center gap-2.5 transition hover:scale-[1.0125] text-left active:scale-[0.9875] active:opacity-50">
+    <button
+      className="flex items-center gap-2.5 transition hover:scale-[1.0125] text-left active:scale-[0.9875] active:opacity-50"
+      onClick={() => handleRandomizeBasedonName(userName)}
+    >
       <UserProfileIcon
         imageSrc={userIconProps?.imageSrc}
         profileState={userIconProps?.profileState}

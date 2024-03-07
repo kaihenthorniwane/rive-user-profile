@@ -52,7 +52,7 @@ export default function Home() {
     UserProfileBarProps[]
   >(initialUserProfileBarContent);
 
-  const handleRandomizeAll = () => {
+  const handleRandomizeAll = (): void => {
     const possibleStates: UserProfileIconStates[] = [
       "away",
       "do not disturb",
@@ -75,6 +75,37 @@ export default function Home() {
                 : "none",
           },
         };
+      })
+    );
+  };
+  const handleRandomizeBasedonName = (name: string): void => {
+    const possibleStates: UserProfileIconStates[] = [
+      "away",
+      "do not disturb",
+      "none",
+      "online",
+      "typing",
+    ];
+
+    setUserProfileBarContent((prevValue) =>
+      prevValue.map((user) => {
+        if (user.userName === name) {
+          const currentState = user.userIconProps?.profileState;
+          const filteredStates = possibleStates.filter(
+            (state) => state !== currentState
+          );
+          const randomState =
+            filteredStates[Math.floor(Math.random() * filteredStates.length)];
+
+          return {
+            ...user,
+            userIconProps: {
+              ...user.userIconProps,
+              profileState: randomState,
+            },
+          };
+        }
+        return user;
       })
     );
   };
@@ -112,6 +143,7 @@ export default function Home() {
                 imageSrc: user.userIconProps.imageSrc,
                 profileState: user.userIconProps.profileState,
               }}
+              handleRandomizeBasedonName={handleRandomizeBasedonName}
             />
           ))}
         </div>
